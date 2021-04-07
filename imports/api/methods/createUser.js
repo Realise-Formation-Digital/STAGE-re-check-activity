@@ -3,15 +3,13 @@ import { check } from 'meteor/check';
 import Users from '../collections/Users.js';
 
 Meteor.methods({
-  'createUser'(name, floor, building,) {
+  'createUser'(name, identification) {
     check(name, String);
-    check(floor, String);
-    check(building, String);
-    
+    check(identification, String);
+     
     return Users.insert({
       name,
-      floor,
-      building,
+      identification,
       });
   },
 });
