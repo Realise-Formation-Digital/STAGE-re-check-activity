@@ -9,6 +9,8 @@ Meteor.methods({
     check(floor, String);
     check(manager, String);
 
+    console.log("ciao", name)
+
     return Buildings.insert({
       name,
       adress,
