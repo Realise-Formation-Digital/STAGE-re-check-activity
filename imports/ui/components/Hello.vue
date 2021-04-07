@@ -1,22 +1,23 @@
 <template>
   <div>
-    <button @click="increment">Click Me</button>
-    <p>You've pressed the button {{counter}} times.</p>
+    <Navbar/>
+    <FormBuilding/>
   </div>
 </template>
 
 <script>
+import Navbar from './Navbar.vue'
+import FormBuilding from './FormBuilding.vue'
+
 export default {
   data() {
     return {
-      counter: 0,
+   counter: 0,
     }
   },
-  methods: {
-    increment() {
-      this.counter += 1
-    }
-  },
+
+  components: { Navbar, FormBuilding
+  }
 }
 </script>
 
