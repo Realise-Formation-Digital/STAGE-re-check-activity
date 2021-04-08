@@ -66,6 +66,7 @@ export default {
     dialog: false,
     form: {
       company: null
+
     }
   }),
   methods: {
@@ -82,12 +83,11 @@ export default {
     },
 
     hideDialog() {
-      this.form.enterprise = null
+      this.form.company = null
       this.dialog = false
     }
   }
 };
 </script>
-
 <style>
 </style>
