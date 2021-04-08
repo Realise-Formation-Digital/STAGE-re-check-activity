@@ -2,7 +2,9 @@
   <v-app-bar color="blue" dense>
     <v-app-bar-title>Recheck</v-app-bar-title>
     <v-spacer></v-spacer>
-    <v-icon>mdi-arrow-all</v-icon>
+    <v-btn>
+    <v-icon>mdi-account</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 
