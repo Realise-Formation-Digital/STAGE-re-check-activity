@@ -5,7 +5,6 @@
     <v-icon>mdi-arrow-all</v-icon>
   </v-app-bar>
 </template>
-
 <script>
 export default {
   name: "Navbar",
