@@ -3,19 +3,19 @@ import { check } from 'meteor/check';
 import Buildings from '../collections/Buildings.js';
 
 Meteor.methods({
-  'createBuilding'(name, adress, floor, company) {
+  'createBuilding'(company, name, adress, floor) {
+    check(company, String);
     check(name, String);
     check(adress, String);
     check(floor, String);
-    check(company, String);
 
     console.log("ciao", name)
 
     return Buildings.insert({
+      company,
       name,
       adress,
       floor,
-      company,
     });
   },
 });
