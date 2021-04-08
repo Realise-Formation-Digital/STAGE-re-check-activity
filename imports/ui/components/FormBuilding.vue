@@ -14,16 +14,16 @@
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field v-model="form.enterprise" label="Entreprise*" required></v-text-field>
+                  <v-text-field v-model="form.company" label="Entreprise*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Name*" required></v-text-field>
+                  <v-text-field v-model="form.name" label="Name*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Adress*" required></v-text-field>
+                  <v-text-field v-model="form.adress" label="Adress*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-autocomplete
+                  <v-autocomplete v-model="form.floor"
                     :items="[
                       'Rez-de-chaussé',
                       '1er',
@@ -65,7 +65,8 @@ export default {
   data: () => ({
     dialog: false,
     form: {
-      enterprise: null
+      company: null
+
     }
   }),
   methods: {
@@ -75,14 +76,14 @@ export default {
 
     createCheck(){
 
-      console.log("Value enteprise", this.form.enterprise)
-      Meteor.call('createBuilding', this.form.enterprise, "Name", "Adress", "Floor")
+      console.log("Value company", this.form.company)
+      Meteor.call('createBuilding', this.form.company, this.form.name, this.form.adress, this.form.floor)
 
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.enterprise = null
+      this.form.company = null
       this.dialog = false
     }
   }
