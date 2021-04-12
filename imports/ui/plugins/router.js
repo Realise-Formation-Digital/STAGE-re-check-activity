@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import Home from "../components/Home";
 import Building from "../components/buildings/Building";
 import Room from "../components/rooms/Room";
+import Users from "../components/users/Users.vue"
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/locaux',
     name: 'room',
     component: Room,
+  },
+  {
+    path: '/utilisateurs',
+    name: 'users',
+    component: Users,
   },
 
 ]
