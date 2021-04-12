@@ -27,7 +27,7 @@ Meteor.methods({
    *  Delete single Room
    * @param {*} id 
    */
-  'deleterRoom'(id) {
+  'deleteRoom'(id) {
     Rooms.remove(id)
   },
 
