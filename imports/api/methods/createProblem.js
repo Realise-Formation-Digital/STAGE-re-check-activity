@@ -5,7 +5,7 @@ import Problems from '../collections/Problems.js';
 Meteor.methods({
   'createProblem'(title, description) {
     check(title, String);
-    check(description);
+    check(description, String);
 
     return Problems.insert({
       title,

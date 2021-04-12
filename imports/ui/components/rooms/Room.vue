@@ -25,7 +25,7 @@
   </v-row>
   <v-dialog
             v-model="dialog"
-            max-width="290"
+            max-width="320"
             >
             <v-card>
               <v-card-title class="headline">

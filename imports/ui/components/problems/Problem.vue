@@ -1,6 +1,6 @@
 <template>
 <v-container style="margin-bottom:200px">
-    <FormBuilding />
+    <FormProblem />
   <v-row align="center" class="list px-3 mx-auto">
     <v-col cols="12" md="8">
     </v-col>
@@ -8,10 +8,10 @@
     </v-col>
     <v-col cols="12" sm="12">
       <v-card class="mx-auto" tile>
-        <v-card-title>Bâtiments</v-card-title>
+        <v-card-title>Problèmes à signaler</v-card-title>
         <v-data-table
           :headers="headers"
-          :items="buildings"
+          :items="problems"
           :items-per-page="5"
           class="elevation-3"
           locale="fr"
@@ -29,10 +29,10 @@
             >
             <v-card>
               <v-card-title class="headline">
-                Bâtiment
+                Problèmes à signaler  
               </v-card-title>
               <v-card-text>
-                Êtes-vous certain de vouloir supprimer le bâtiment <strong>{{foundBuilding && foundBuilding.name}}</strong> ?
+                Êtes-vous certain de vouloir supprimer ce problème <strong>{{foundProblem && foundProblem.title}}</strong> ?
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -44,7 +44,7 @@
                 <v-btn
                 color="green darken-1"
                 text
-                @click="onRemoveBuilding()"
+                @click="onRemoveProblem()"
                 >Confirmer</v-btn>
               </v-card-actions>
             </v-card>
@@ -52,54 +52,52 @@
   </v-container>
 </template>
 <script>
-import Buildings from '../../../api/collections/Buildings';
-import FormBuilding from "./FormBuilding.vue";
+import Problems from '../../../api/collections/Problems';
+import FormProblem from "./FormProblem.vue";
 
 export default {
-  name: "buildings",
+  name: "problems",
   data() {
     return {
-      Buildings: [],
+      Problems: [],
       name: "",
       headers: [
-        { text: "Entreprise", align: "start", sortable: true, value: "company" },
-        { text: "Bâtiment", value: "name", sortable: true },
-        { text: "Adresse", value: "adress", sortable: true },
-        { text: "Etage", value: "floor", sortable: true },
+        { text: "Problème", align: "start", sortable: true, value: "title" },
+        { text: "Description", value: "description", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
-      foundBuilding: null
+      foundProblem: null
     };
   },
 
-  components: { FormBuilding },
+  components: { FormProblem },
 
   meteor: {
       $subscribe: {
-        'buildings': [],
+        'problems': [],
       },
-      buildings() {
-        return Buildings.find();
+      problems() {
+        return Problems.find();
       },
   },
 
   methods: {
     showDialog(id) {
-      this.foundBuilding = this.buildings.find((building) => building._id === id)
-      console.log("Building", this.foundBuilding)
+      this.foundProblem = this.problems.find((problem) => problem._id === id)
+      console.log("Problem", this.foundProblem)
       this.dialog = true
     },
 
-    onRemoveBuilding() {
-      if (!this.foundBuilding) return
-      Meteor.call('deletebuilding',  this.foundBuilding._id);
-      this.foundBuilding = false;
+    onRemoveProblem() {
+      if (!this.foundProblem) return
+      Meteor.call('deleteproblem',  this.foundProblem._id);
+      this.foundProblem = false;
       this.hideDialog();
     },
 
     hideDialog() {
-      this.foundBuilding = null
+      this.foundProblem = null
       this.dialog = false
     }
   },
