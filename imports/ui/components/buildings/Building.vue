@@ -17,8 +17,7 @@
           locale="fr"
         >
           <template v-slot:[`item.actions`]="{ item }">
-            <v-icon @click="showDialog(id)">mdi-delete</v-icon>{{ item._id }}
-            
+            <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
           </template>
         </v-data-table>
       </v-card>
@@ -33,7 +32,7 @@
                 Bâtiment
               </v-card-title>
               <v-card-text>
-                Êtes-vous certain de vouloir supprimer le bâtiment <strong></strong> ?
+                Êtes-vous certain de vouloir supprimer le bâtiment <strong>{{foundBuilding && foundBuilding.name}}</strong> ?
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -45,7 +44,7 @@
                 <v-btn
                 color="green darken-1"
                 text
-                @click="onRemoveBuilding(_id)"
+                @click="onRemoveBuilding()"
                 >Confirmer</v-btn>
               </v-card-actions>
             </v-card>
@@ -70,7 +69,6 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
-      id: null,
       foundBuilding: null
     };
   },
@@ -88,18 +86,20 @@ export default {
 
   methods: {
     showDialog(id) {
-      this.foundBuilding = Buildings.find((building) => building._id === id)
+      this.foundBuilding = this.buildings.find((building) => building._id === id)
+      console.log("Building", this.foundBuilding)
       this.dialog = true
     },
 
-    onRemoveBuilding(_id) {
-      Meteor.call('deletebuilding', _id);
-      this.item = false;
+    onRemoveBuilding() {
+      if (!this.foundBuilding) return
+      Meteor.call('deletebuilding',  this.foundBuilding._id);
+      this.foundBuilding = false;
       this.hideDialog();
     },
 
     hideDialog() {
-      this.item._id= null
+      this.foundBuilding = null
       this.dialog = false
     }
   },

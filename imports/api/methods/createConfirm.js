@@ -9,5 +9,8 @@ Meteor.methods({
     return Confirms.insert({
       timestamp,
     });
-  },
+},
+'deletebconfirm'(_id){
+  Confirms.remove(_id)
+},
 });

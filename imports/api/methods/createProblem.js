@@ -12,4 +12,7 @@ Meteor.methods({
       description,
     });
   },
+  'deleteproblem'(_id){
+    Problems.remove(_id)
+ },
 });

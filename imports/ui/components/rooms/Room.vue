@@ -17,17 +17,22 @@
           locale="fr"
         >
           <template v-slot:[`item.actions`]="{ item }">
-            <v-icon @click="dialog = true">mdi-delete</v-icon>
-            <v-dialog
+            <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
+          </template>
+        </v-data-table>
+      </v-card>
+    </v-col>
+  </v-row>
+  <v-dialog
             v-model="dialog"
             max-width="290"
             >
             <v-card>
               <v-card-title class="headline">
-                Local {{ item.name }}
+                Local
               </v-card-title>
               <v-card-text>
-                Êtes-vous certain de vouloir supprimer le local <strong>{{ item.name }}</strong> ?
+                Êtes-vous certain de vouloir supprimer le local <strong>{{foundRoom && foundRoom.name}}</strong> ?
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -39,16 +44,11 @@
                 <v-btn
                 color="green darken-1"
                 text
-                @click="onRemoveRoom(item._id)"
+                @click="onRemoveRoom()"
                 >Confirmer</v-btn>
               </v-card-actions>
             </v-card>
             </v-dialog>
-          </template>
-        </v-data-table>
-      </v-card>
-    </v-col>
-  </v-row>
   </v-container>
 </template>
 <script>
@@ -67,6 +67,7 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
+      foundRoom: null
     };
   },
 
@@ -82,18 +83,21 @@ export default {
   },
 
   methods: {
-    showDialog() {
+    showDialog(id) {
+      this.foundRoom = this.rooms.find((room) => room._id === id)
+      console.log("Room", this.foundRoom)
       this.dialog = true
     },
 
-    onRemoveRoom(_id) {
-      Meteor.call('deleteroom', _id);
-      this.item = false;
+    onRemoveRoom() {
+      if (!this.foundRoom) return
+      Meteor.call('deleteroom',  this.foundRoom._id);
+      this.foundRoom = false;
       this.hideDialog();
     },
 
     hideDialog() {
-      this.item._id= null
+      this.foundRoom = null
       this.dialog = false
     }
   },
