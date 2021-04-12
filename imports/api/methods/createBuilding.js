@@ -8,7 +8,7 @@ Meteor.methods({
    * Create new building 
    * @param {String} company - company's building
    * @param {String} name - name of the building
-   * @param {String} adress - address of the building
+   * @param {String} adress - adress of the building
    * @param {String} floor - floor of the building
    * @returns 
    */
@@ -40,23 +40,23 @@ Meteor.methods({
    * Edit of a single building
    * @param {*} id - Id of building that we want to modify
    * @param {String} name - new name of building
-   * @param {String} address - new address of buildin
+   * @param {String} adress - new adress of buildin
    * @param {String} floor - new floow of building
    * @param {String} company - new company of building
    */
-  'editBuilding' (id, name, address, floor, company) {
+  'editBuilding' (id, name, adress, floor, company) {
 
     // First we have to check if the fields are inserted in the right way 
     check(company, String);
     check(name, String);
-    check(address, String);
+    check(adress, String);
     check(floor, String);
 
     // we have to update the database
     Buildings.update({"_id": id}, {
       'company': company,
       'name': name,
-      'address': address,
+      'adress': adress,
       'floor': floor
     })
   }
