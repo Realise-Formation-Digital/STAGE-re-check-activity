@@ -20,5 +20,5 @@ Meteor.methods({
   },
   'deletebuilding'(_id){
     Buildings.remove(_id)
- }, 
+  },
 });

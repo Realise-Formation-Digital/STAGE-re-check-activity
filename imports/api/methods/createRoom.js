@@ -3,17 +3,23 @@ import { check } from 'meteor/check';
 import Rooms from '../collections/Rooms.js';
 
 Meteor.methods({
-  'createRoom'(name, floor) {
+  'createRoom'(name, floor, buildingId) {
     check(name, String);
     check(floor, String);
+    check(buildingId, String);
     
 
     return Rooms.insert({
       name,
       floor,
+      buildingId,
     });
   },
   'deleteroom'(_id){
     Rooms.remove(_id)
+<<<<<<< HEAD
  },
+=======
+  },
+>>>>>>> 99de4a50f243d93ab99e26122278723931360bf6
 });
