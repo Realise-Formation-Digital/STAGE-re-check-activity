@@ -12,4 +12,7 @@ Meteor.methods({
       identification,
       });
   },
+  'deleteuser'(_id){
+    Users.remove(_id)
+ },
 });

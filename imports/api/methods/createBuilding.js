@@ -18,4 +18,7 @@ Meteor.methods({
       floor,
     });
   },
+  'deletebuilding'(_id){
+    Buildings.remove(_id)
+ }, 
 });

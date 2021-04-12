@@ -13,4 +13,7 @@ Meteor.methods({
       floor,
     });
   },
+  'deleteroom'(_id){
+    Rooms.remove(_id)
+ },
 });
