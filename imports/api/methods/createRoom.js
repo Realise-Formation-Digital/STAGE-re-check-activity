@@ -17,5 +17,9 @@ Meteor.methods({
   },
   'deleteroom'(_id){
     Rooms.remove(_id)
+<<<<<<< HEAD
+ },
+=======
   },
+>>>>>>> 99de4a50f243d93ab99e26122278723931360bf6
 });
