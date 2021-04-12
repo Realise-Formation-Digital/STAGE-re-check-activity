@@ -2,7 +2,7 @@
     <v-container>
         <v-navigation-drawer v-model="sideNav" container style="margin-top:20px">
             <v-list>
-                <v-list-item v-for="item in items" :key="item.title" @click="onClickMenuItem(item.title)">
+                <v-list-item v-for="item in items" :key="item.title">
                      <v-list-item-content>
                         <router-link :to="item.route" tag="span" style="cursor: pointer"><v-list-item-title v-text="item.title"></v-list-item-title></router-link>
                     </v-list-item-content>
@@ -17,7 +17,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-xs-only">
-              <v-btn color="primary" class="mx-1" v-for="item in items" :key="item.title" @click="onClickMenuItem(item.title)">
+              <v-btn color="primary" class="mx-1" v-for="item in items" :key="item.title">
                     <router-link :to="item.route" tag="span" style="cursor: pointer"><v-icon left dark>{{ item.icon }}</v-icon>
                     {{ item.title }}</router-link>
               </v-btn>
@@ -33,7 +33,8 @@ export default {
       items: [
         { title:"ACCUEIL", route:"/", icon: "mdi-home" },
         { title:"BATIMENTS", route:"/batiments", icon: "mdi-office-building"},
-        { title:"LOCAUX", route:"/locaux", icon: "mdi-home-city-outline" }
+        { title:"LOCAUX", route:"/locaux", icon: "mdi-home-city-outline" },
+        { title:"PROBLEMES", route:"/problemes", icon: "mdi-alert-outline"}      
       ]
     })
 }

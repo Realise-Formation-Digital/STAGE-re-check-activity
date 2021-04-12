@@ -2,42 +2,23 @@
   <v-container class="formulaire">
     <v-row justify="right">
       <v-btn color="success" dark @click="dialog = true">
-            Ajouter un bâtiment
+            Ajouter un problème 
       </v-btn>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
           <v-card-title>
-            <span class="headline">Ajouter un bâtiment</span>
+            <span class="headline">Ajouter un problème </span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field v-model="form.company" label="Entreprise*" required></v-text-field>
+                  <v-text-field v-model="form.title" label="Nature du problème*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="form.name" label="Bâtiment*" required></v-text-field>
+                  <v-text-field v-model="form.description" label="Description du problème*" required></v-text-field>
                 </v-col>
-                <v-col cols="12">
-                  <v-text-field v-model="form.adress" label="Adresse*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-autocomplete v-model="form.floor"
-                    :items="[
-                      'Rez-de-chaussée',
-                      '1er',
-                      '2ème',
-                      '3ème',
-                      '4ème',
-                      '5ème',
-                      '6ème',
-                      '7ème',
-                      '8ème',
-                    ]"
-                    label="Etage*"
-                  ></v-autocomplete>
-                </v-col>
-              </v-row>
+                   </v-row>
             </v-container>
             <small>*Champs obligatoires</small>
           </v-card-text>
@@ -47,7 +28,7 @@
               Fermer
             </v-btn>
             <v-btn color="blue darken-1" text @click="createCheck()">
-              Enregister
+              Enregistrer
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -59,7 +40,7 @@
 
 <script>
 export default {
-  name: "FormBuilding",
+  name: "FormProblem",
 
   data: () => ({
     dialog: false,
@@ -75,14 +56,14 @@ export default {
 
     createCheck(){
 
-      console.log("Value company", this.form.company)
-      Meteor.call('createBuilding', this.form.company, this.form.name, this.form.adress, this.form.floor)
+      console.log("Value title", this.form.title)
+      Meteor.call('createProblem', this.form.title, this.form.description)
       location.reload()
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.company = null
+      this.form.title = null
       this.dialog = false
     }
   }

@@ -7,7 +7,7 @@
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
           <v-card-title>
-            <span class="headline">Nouveau Local</span>
+            <span class="headline">Ajouter un local</span>
           </v-card-title>
           <v-card-text>
             <v-container>
