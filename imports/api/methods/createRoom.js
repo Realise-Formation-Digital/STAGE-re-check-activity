@@ -23,11 +23,12 @@ Meteor.methods({
       buildingId,
     });
   },
+  
   /**
    *  Delete Room
    * @param {*} _id 
    */
-  'deleteroom'(id){
+  'deleteRoom'(id) {
     Rooms.remove({'_id':id})
   },
 
