@@ -1,7 +1,7 @@
-import './createLink'
-import './createBuilding'
-import './createConfirm'
-import './createProblem'
-import './createRoom'
-import './createUser'
+import './Link'
+import './Building'
+import './Confirm'
+import './Problem'
+import './Room'
+import './User'
 
