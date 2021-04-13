@@ -18,8 +18,6 @@ Meteor.methods({
     check(address, String);
     check(floor, String);
 
-    console.log("ciao", name)
-
     return Buildings.insert({
       company,
       name,

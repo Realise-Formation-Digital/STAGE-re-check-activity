@@ -3,18 +3,6 @@ import { check } from 'meteor/check';
 import Users from '../collections/Users.js';
 
 Meteor.methods({
-  'createUser'(name, identification) {
-    check(name, String);
-    check(identification, String);
-     
-    return Users.insert({
-      name,
-      identification,
-      });
-  },
-  'deleteuser'(_id){
-    Users.remove(_id)
- },
   /**
    * Create new user 
    * @param {String} name - user's name
@@ -24,7 +12,7 @@ Meteor.methods({
    'createUser'(name, identification) {
     check(name, String);
     check(identification, String);
-    console.log("ciao", name)
+   
 
     return Users.insert({
       name,
@@ -46,7 +34,7 @@ Meteor.methods({
    * @param {String} name - user's name 
    * @param {String} identification - identification of the user
    */
-  'editUser' (id, name, identification) {
+  'edituser' (id, name, identification) {
 
     // First we have to check if the fields are inserted in the right way 
     check(name, String);
