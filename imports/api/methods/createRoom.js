@@ -24,11 +24,11 @@ Meteor.methods({
     });
   },
   /**
-   *  Delete single Room
-   * @param {*} id 
+   *  Delete Room
+   * @param {*} _id 
    */
-  'deleteRoom'(id) {
-    Rooms.remove(id)
+  'deleteroom'(id){
+    Rooms.remove({'_id':id})
   },
 
   /**

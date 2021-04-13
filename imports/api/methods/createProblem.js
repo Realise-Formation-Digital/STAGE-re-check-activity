@@ -12,8 +12,8 @@ Meteor.methods({
       description,
     });
   },
-  'deleteproblem'(_id){
-    Problems.remove(_id)
+  'deleteproblem'(id){
+    Problems.remove({'_id':id})
  },
  /**
    * Edit of a problem
@@ -30,7 +30,8 @@ Meteor.methods({
     check(problemId, String);
 
     // we have to update the database
-    Problem.update({ "_id": id }, {
+    Problem.update({ "_id": id }, 
+    {
       'title': title,
       'description': description,
       'problemId': problemId
