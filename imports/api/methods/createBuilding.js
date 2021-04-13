@@ -32,8 +32,8 @@ Meteor.methods({
    * Delete single building
    * @param {*} _id 
    */
-  'deletebuilding'(_id){
-    Buildings.remove(_id)
+  'deletebuilding'(id){
+    Buildings.remove({'_id':id})
   },
 
   /**
@@ -44,7 +44,7 @@ Meteor.methods({
    * @param {String} floor - new floor of building
    * @param {String} company - new company of building
    */
-  'editBuilding' (id, name, adress, floor, company) {
+  'editBuilding' (id, company, name, adress, floor) {
 
     // First we have to check if the fields are inserted in the right way 
     check(company, String);

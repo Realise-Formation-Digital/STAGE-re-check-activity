@@ -23,33 +23,22 @@
       </v-card>
     </v-col>
   </v-row>
-  <v-dialog
-            v-model="dialog"
-            max-width="320"
-            >
-            <v-card>
-              <v-card-title class="headline">
-                Local
-              </v-card-title>
-              <v-card-text>
-                Êtes-vous certain de vouloir supprimer le local <strong>{{foundRoom && foundRoom.name}}</strong> ?
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-                >Annuler</v-btn>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="onRemoveRoom()"
-                >Confirmer</v-btn>
-              </v-card-actions>
-            </v-card>
-            </v-dialog>
-  </v-container>
+  <v-dialog v-model="dialog" max-width="320">
+    <v-card>
+      <v-card-title class="headline">
+        Local
+      </v-card-title>
+      <v-card-text>
+        Êtes-vous certain de vouloir supprimer le local <strong>{{foundRoom && foundRoom.name}}</strong> ?
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialog = false">Annuler</v-btn>
+          <v-btn color="green darken-1" text @click="onRemoveRoom()">Confirmer</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</v-container>
 </template>
 <script>
 import Rooms from '../../../api/collections/Rooms';
