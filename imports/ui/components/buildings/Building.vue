@@ -54,7 +54,7 @@
               <v-text-field v-model="foundBuilding.name" label="Bâtiment*" required></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-text-field v-model="foundBuilding.adress" label="Adresse*" required></v-text-field>
+              <v-text-field v-model="foundBuilding.address" label="Adresse*" required></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-autocomplete v-model="foundBuilding.floor"
@@ -99,14 +99,14 @@ export default {
       headers: [
         { text: "Entreprise", align: "start", sortable: true, value: "company" },
         { text: "Bâtiment", value: "name", sortable: true },
-        { text: "Adresse", value: "adress", sortable: true },
+        { text: "Adresse", value: "address", sortable: true },
         { text: "Etage", value: "floor", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
       dialog1: false,
       form: '',
-      foundBuilding: {_id:null, company:null, name:null, adress:null, floor:null}
+      foundBuilding: {_id:null, company:null, name:null, address:null, floor:null}
     };
   },
 
@@ -135,24 +135,25 @@ export default {
     },
 
     updateCheck(){
-      Meteor.call('editBuilding', this.foundBuilding._id, this.foundBuilding.company, this.foundBuilding.name, this.foundBuilding.adress, this.foundBuilding.floor)
+      Meteor.call('editBuilding', this.foundBuilding._id, this.foundBuilding.company, this.foundBuilding.name, 
+      this.foundBuilding.address, this.foundBuilding.floor)
       this.hideDialog1()
     },
 
     onRemoveBuilding() {
       if (!this.foundBuilding) return
       Meteor.call('deletebuilding',  this.foundBuilding._id);
-      this.foundBuilding = {_id:null, company:null, name:null, adress:null, floor:null};
+      this.foundBuilding = {_id:null, company:null, name:null, address:null, floor:null};
       this.hideDialog();
     },
 
     hideDialog() {
-      this.foundBuilding = {_id:null, company:null, name:null, adress:null, floor:null};
+      this.foundBuilding = {_id:null, company:null, name:null, address:null, floor:null};
       this.dialog = false
     },
 
     hideDialog1() {
-      this.foundBuilding = {_id:null, company:null, name:null, adress:null, floor:null};
+      this.foundBuilding = {_id:null, company:null, name:null, address:null, floor:null};
       this.dialog1 = false
     }
   },

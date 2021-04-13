@@ -1,41 +1,22 @@
 <template>
   <v-container class="formulaire">
-    <v-row>
+    <v-row justify="right">
       <v-btn color="success" dark @click="dialog = true">
-            Ajouter un bâtiment
+            Ajouter un utilisateur
       </v-btn>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
           <v-card-title>
-            <span class="headline">Ajouter un bâtiment</span>
+            <span class="headline">Données Utilisateur</span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field v-model="form.company" label="Entreprise*" required></v-text-field>
+                  <v-text-field v-model="form.name" label="Nom*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="form.name" label="Bâtiment*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field v-model="form.address" label="Adresse*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-autocomplete v-model="form.floor"
-                    :items="[
-                      'Rez-de-chaussée',
-                      '1er',
-                      '2ème',
-                      '3ème',
-                      '4ème',
-                      '5ème',
-                      '6ème',
-                      '7ème',
-                      '8ème',
-                    ]"
-                    label="Etage*"
-                  ></v-autocomplete>
+                  <v-text-field v-model="form.identification" label="Identification*" required></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -59,7 +40,7 @@
 
 <script>
 export default {
-  name: "FormBuilding",
+  name: "FormUser",
 
   data: () => ({
     dialog: false,
@@ -75,14 +56,14 @@ export default {
 
     createCheck(){
 
-      console.log("Value company", this.form.company)
-      Meteor.call('createBuilding', this.form.company, this.form.name, this.form.address, this.form.floor)
+      console.log("Value company", this.form.name)
+      Meteor.call('createUser', this.form.name, this.form.identification)
       location.reload()
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.company = null
+      this.form.name = null
       this.dialog = false
     }
   }
