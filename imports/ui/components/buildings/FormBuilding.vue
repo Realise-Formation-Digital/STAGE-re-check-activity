@@ -19,7 +19,7 @@
                   <v-text-field v-model="form.name" label="Bâtiment*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="form.adress" label="Adresse*" required></v-text-field>
+                  <v-text-field v-model="form.address" label="Adresse*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-autocomplete v-model="form.floor"
@@ -76,7 +76,7 @@ export default {
     createCheck(){
 
       console.log("Value company", this.form.company)
-      Meteor.call('createBuilding', this.form.company, this.form.name, this.form.adress, this.form.floor)
+      Meteor.call('createBuilding', this.form.company, this.form.name, this.form.address, this.form.floor)
       location.reload()
       this.hideDialog()
     },
