@@ -1,6 +1,6 @@
 <template>
   <v-container class="formulaire">
-    <v-row justify="right">
+    <v-row>
       <v-btn color="success" dark @click="dialog = true">
             Ajouter un problème 
       </v-btn>

@@ -23,33 +23,22 @@
       </v-card>
     </v-col>
   </v-row>
-  <v-dialog
-            v-model="dialog"
-            max-width="320"
-            >
-            <v-card>
-              <v-card-title class="headline">
-                Problèmes à signaler  
-              </v-card-title>
-              <v-card-text>
-                Êtes-vous certain de vouloir supprimer ce problème <strong>{{foundProblem && foundProblem.title}}</strong> ?
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-                >Annuler</v-btn>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="onRemoveProblem()"
-                >Confirmer</v-btn>
-              </v-card-actions>
-            </v-card>
-            </v-dialog>
-  </v-container>
+  <v-dialog v-model="dialog" max-width="320">
+    <v-card>
+      <v-card-title class="headline">
+        Problèmes à signaler  
+      </v-card-title>
+      <v-card-text>
+        Êtes-vous certain de vouloir supprimer ce problème <strong>{{foundProblem && foundProblem.title}}</strong> ?
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialog = false">Annuler</v-btn>
+          <v-btn color="green darken-1" text @click="onRemoveProblem()">Confirmer</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</v-container>
 </template>
 <script>
 import Problems from '../../../api/collections/Problems';
