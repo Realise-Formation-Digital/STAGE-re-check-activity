@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-navigation-drawer v-model="sideNav" container style="margin-top:20px">
+        <v-navigation-drawer v-model="sideNav" container style="margin-top:40px">
             <v-list>
                 <v-list-item v-for="item in items" :key="item.title">
                      <v-list-item-content>
