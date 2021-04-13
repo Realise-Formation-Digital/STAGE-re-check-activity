@@ -8,7 +8,7 @@ import Home from "../components/Home";
 import Building from "../components/buildings/Building";
 import Room from "../components/rooms/Room";
 import Problem from "../components/problems/Problem";
-import Users from "../components/users/Users"
+import User from "../components/users/User"
 
 Vue.use(VueRouter)
 
@@ -30,8 +30,8 @@ const routes = [
   },
   {
     path: '/utilisateurs',
-    name: 'users',
-    component: Users,
+    name: 'user',
+    component: User,
   },
   {
     path: '/problemes',

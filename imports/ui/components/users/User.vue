@@ -1,5 +1,5 @@
 <template>
-<v-container style="margin-bottom:200px">
+ <v-container style="margin-bottom:200px">
     <FormUser />
   <v-row align="center" class="list px-3 mx-auto">
     <v-col cols="12" md="8">
@@ -23,35 +23,23 @@
       </v-card>
     </v-col>
   </v-row>
-  <v-dialog
-            v-model="dialog"
-            max-width="290"
-            >
-            <v-card>
-              <v-card-title class="headline">
-                Utilisateur
-              </v-card-title>
-              <v-card-text>
-                Êtes-vous certain de vouloir supprimer l'utilisateur <strong>{{foundUser && foundUser.name}}</strong> ?
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-                >Annuler</v-btn>
-                <v-btn
-                color="green darken-1"
-                text
-                @click="onRemoveUser()"
-                >Confirmer</v-btn>
-              </v-card-actions>
-            </v-card>
-            </v-dialog>
-  </v-container>
-  </template>
-
+  <v-dialog v-model="dialog" max-width="290">
+    <v-card>
+      <v-card-title class="headline">
+        Utilisateur
+      </v-card-title>
+      <v-card-text>
+        Êtes-vous certain de vouloir supprimer l'utilisateur <strong>{{foundUser && foundUser.name}}</strong> ?
+      </v-card-text>
+        <v-card-actions>
+        <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialog = false">Annuler</v-btn>
+          <v-btn color="green darken-1" text @click="onRemoveUser()">Confirmer</v-btn>
+        </v-card-actions>
+    </v-card>
+  </v-dialog>
+</v-container>
+</template>
 <script>
 import Users from '../../../api/collections/Users';
 import FormUser from "./FormUser.vue";
@@ -65,6 +53,8 @@ export default {
       headers: [
         { text: "Nom", align: "start", sortable: true, value: "name" },
         { text: "Id", value: "identification", sortable: true },
+        { text: "Actions", value: "actions", sortable: false },
+ 
       ],
       dialog: '',
       foundUser: null
@@ -85,7 +75,6 @@ export default {
   methods: {
     showDialog(id) {
       this.foundUser = this.users.find((user) => user._id === id)
-      console.log("User", this.foundUser)
       this.dialog = true
     },
 
