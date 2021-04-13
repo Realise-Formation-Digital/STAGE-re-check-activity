@@ -34,8 +34,8 @@ export default {
         { title:"ACCUEIL", route:"/", icon: "mdi-home" },
         { title:"BATIMENTS", route:"/batiments", icon: "mdi-office-building"},
         { title:"LOCAUX", route:"/locaux", icon: "mdi-home-city-outline" },
-        { title:"PROBLEMES", route:"/problemes", icon: "mdi-alert-outline"}      
-        { title:"UTILISATEURS", route:"/users", icon: "mdi-account" }
+        { title:"PROBLEMES", route:"/problemes", icon: "mdi-alert-outline"},      
+        { title:"UTILISATEURS", route:"/utilisateurs", icon: "mdi-account" }
       ]
     })
 }
