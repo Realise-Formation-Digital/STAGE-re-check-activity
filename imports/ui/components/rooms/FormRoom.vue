@@ -1,31 +1,31 @@
 <template>
   <v-container class="formulaire">
-    <v-row justify="right">
-
-      <v-btn color="primary" dark @click="dialog = true">
-            Ajouter Building
-          </v-btn>
+    <v-row>
+     <v-btn color="success" dark @click="dialog = true">
+            Ajouter un local
+     </v-btn>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
           <v-card-title>
-            <span class="headline">Données Building</span>
+            <span class="headline">Ajouter un local</span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field v-model="form.enterprise" label="Entreprise*" required></v-text-field>
+                  <v-select v-model="form.buildingId" label="Bâtiment*" required
+                   :items="buildingList"
+                   item-value="id"
+                   item-text="name"
+                  />                     
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Name*" required></v-text-field>
+                  <v-text-field v-model="form.name" label="Local*" required></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="Adress*" required></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-autocomplete
+                  <v-autocomplete v-model="form.floor"
                     :items="[
-                      'Rez-de-chaussé',
+                      'Rez-de-chaussée',
                       '1er',
                       '2ème',
                       '3ème',
@@ -35,20 +35,20 @@
                       '7ème',
                       '8ème',
                     ]"
-                    label="Floor*"
+                    label="Etage*"
                   ></v-autocomplete>
                 </v-col>
               </v-row>
             </v-container>
-            <small>*indicates required field</small>
+            <small>*Champs obligatoires</small>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="hideDialog()">
-              Close
+              Fermer
             </v-btn>
             <v-btn color="blue darken-1" text @click="createCheck()">
-              Save
+              Enregistrer
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -56,17 +56,34 @@
     </v-row>
   </v-container>
 </template>
-
-
 <script>
+import Buildings from '../../../api/collections/Buildings';
 export default {
-  name: "FormBuilding",
-
+  name: "FormRoom",
+  meteor: {
+    $subscribe: {
+      'buildings': [],
+    },
+    buildings() {
+      return Buildings.find();
+    },
+    buildingList() {
+      const buildingsFound = Buildings.find();
+      return buildingsFound.map((building) => {
+        return {
+          name: building.name,
+          id: building._id
+        }
+      })
+    }
+  },
   data: () => ({
     dialog: false,
     form: {
-      enterprise: null
-    }
+      room: null
+
+    },
+    
   }),
   methods: {
     showDialog() {
@@ -75,19 +92,17 @@ export default {
 
     createCheck(){
 
-      console.log("Value enteprise", this.form.enterprise)
-      Meteor.call('createBuilding', this.form.enterprise, "Name", "Adress", "Floor")
+      console.log("Value name", this.form.buildingId)
+      Meteor.call('createRoom', this.form.name, this.form.floor, this.form.buildingId)
+      
 
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.enterprise = null
+      this.form.buildingId= null
       this.dialog = false
     }
   }
 };
 </script>
-
-<style>
-</style>
