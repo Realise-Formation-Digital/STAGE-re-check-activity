@@ -56,7 +56,7 @@ Meteor.methods({
     Buildings.update({"_id": id}, {
       'company': company,
       'name': name,
-      'adress': address,
+      'address': address,
       'floor': floor
     })
   }

@@ -135,7 +135,8 @@ export default {
     },
 
     updateCheck(){
-      Meteor.call('editBuilding', this.foundBuilding._id, this.foundBuilding.company, this.foundBuilding.name, this.foundBuilding.address, this.foundBuilding.floor)
+      Meteor.call('editBuilding', this.foundBuilding._id, this.foundBuilding.company, this.foundBuilding.name, 
+      this.foundBuilding.address, this.foundBuilding.floor)
       this.hideDialog1()
     },
 
