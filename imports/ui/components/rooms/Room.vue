@@ -80,7 +80,7 @@ export default {
 
     onRemoveRoom() {
       if (!this.foundRoom) return
-      Meteor.call('deleteroom',  this.foundRoom._id);
+      Meteor.call('deleteRoom',  this.foundRoom._id);
       this.foundRoom = false;
       this.hideDialog();
     },
