@@ -4,23 +4,25 @@
             <v-list>
                 <v-list-item v-for="item in items" :key="item.title">
                      <v-list-item-content>
-                        <router-link :to="item.route" tag="span" style="cursor: pointer"><v-list-item-title v-text="item.title"></v-list-item-title></router-link>
+                        <router-link :to="item.route" custom v-slot="{ navigate }"><span @click="navigate" @keypress.enter="navigate" role="link"><v-list-item-title v-text="item.title"></v-list-item-title></span></router-link>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
-        <v-app-bar dark fixed container  >
+        <v-app-bar dark fixed container>
             <v-app-bar-nav-icon @click.native.stop="sideNav = !sideNav" class="hidden-sm-and-up">
             </v-app-bar-nav-icon>
             <v-toolbar-title>
-                <router-link to="/" tag="span" style="cursor: pointer"> Re-Check-Activity </router-link>
+                <router-link to="/" custom v-slot="{ navigate }"><span @click="navigate" @keypress.enter="navigate" role="link"> Re-Check-Activity </span></router-link>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items class="hidden-xs-only">
-              <v-btn color="primary" class="mx-1" v-for="item in items" :key="item.title">
-                    <router-link :to="item.route" tag="span" style="cursor: pointer"><v-icon left dark>{{ item.icon }}</v-icon>
-                    {{ item.title }}</router-link>
-              </v-btn>
+            <v-toolbar-items class="hidden-xs-only" v-for="item in items" :key="item.title" >
+              <div class="my-3">
+                <v-btn :to="item.route" color="grey darken-3" class="mx-1" >
+                  <v-icon left dark>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                </v-btn>
+              </div>
             </v-toolbar-items>
         </v-app-bar>
     </v-container>
