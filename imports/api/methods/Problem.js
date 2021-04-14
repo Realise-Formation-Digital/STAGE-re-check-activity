@@ -27,14 +27,12 @@ Meteor.methods({
     // First we have to check if the fields are inserted in the right way 
     check(title, String);
     check(description, String);
-    check(problemId, String);
 
     // we have to update the database
-    Problem.update({ "_id": id }, 
+    Problems.update({ "_id": id }, 
     {
       'title': title,
       'description': description,
-      'problemId': problemId
     })
   }
 });

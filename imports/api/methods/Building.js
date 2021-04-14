@@ -35,7 +35,7 @@ Meteor.methods({
   },
 
   /**
-   * Edit of a single building
+   * Edit of a building
    * @param {*} id - Id of building that we want to modify
    * @param {String} name - new name of building
    * @param {String} address - new address of buildin
