@@ -9,6 +9,7 @@ import Building from "../components/buildings/Building";
 import Room from "../components/rooms/Room";
 import Problem from "../components/problems/Problem";
 import User from "../components/users/User"
+import Confirm from "../components/confirms/Confirm"
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ const routes = [
     path: '/problemes',
     name: 'problem',
     component: Problem,
+  },
+  {
+    path: '/confirmations',
+    name: 'confirm',
+    component: Confirm,
   },
 
 ]
