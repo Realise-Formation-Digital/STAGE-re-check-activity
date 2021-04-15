@@ -18,7 +18,7 @@
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-xs-only" v-for="item in items" :key="item.title" >
               <div class="my-3">
-                <v-btn :to="item.route" color="grey darken-3" class="mx-1" >
+                <v-btn :to="item.route" :color="item.color" class="mx-1" >
                   <v-icon left dark>{{ item.icon }}</v-icon>
                     {{ item.title }}
                 </v-btn>
@@ -33,11 +33,12 @@ export default {
     data: () => ({
       sideNav: false,
       items: [
-        { title:"ACCUEIL", route:"/", icon: "mdi-home" },
-        { title:"BATIMENTS", route:"/batiments", icon: "mdi-office-building"},
-        { title:"LOCAUX", route:"/locaux", icon: "mdi-home-city-outline" },
-        { title:"PROBLEMES", route:"/problemes", icon: "mdi-alert-outline"},      
-        { title:"UTILISATEURS", route:"/utilisateurs", icon: "mdi-account" }
+        { title:"ACCUEIL", route:"/", icon: "mdi-home", color: "green" },
+        { title:"BATIMENTS", route:"/batiments", icon: "mdi-office-building", color: "orange"},
+        { title:"LOCAUX", route:"/locaux", icon: "mdi-home-city-outline", color: "grey" },
+        { title:"PROBLEMES", route:"/problemes", icon: "mdi-alert-outline", color: "brown"},
+        { title:"CONFIRMATIONS", route:"/confirmations", icon: "mdi-check-circle-outline", color: "blue"},
+        { title:"UTILISATEURS", route:"/utilisateurs", icon: "mdi-account", color: "red"}
       ]
     })
 }
