@@ -1,6 +1,6 @@
 <template>
-    <v-container>
-        <v-navigation-drawer v-model="sideNav" container style="margin-top:40px">
+    <div>
+        <v-navigation-drawer v-model="sideNav" container absolute>
             <v-list>
                 <v-list-item v-for="item in items" :key="item.title">
                      <v-list-item-content>
@@ -9,11 +9,11 @@
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
-        <v-app-bar dark fixed container>
+        <v-app-bar dark>
             <v-app-bar-nav-icon @click.native.stop="sideNav = !sideNav" class="hidden-sm-and-up">
             </v-app-bar-nav-icon>
             <v-toolbar-title>
-                <router-link to="/" custom v-slot="{ navigate }"><span @click="navigate" @keypress.enter="navigate" role="link"> Re-Check-Activity </span></router-link>
+                Re-Check-Activity
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-xs-only" v-for="item in items" :key="item.title" >
@@ -25,7 +25,7 @@
               </div>
             </v-toolbar-items>
         </v-app-bar>
-    </v-container>
+    </div>
 </template>
 <script>
 export default {
