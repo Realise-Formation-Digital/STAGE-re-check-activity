@@ -44,8 +44,6 @@
     </v-row>
   </v-container>
 </template>
-
-
 <script>
 export default {
   name: "FormUser",
@@ -62,14 +60,16 @@ export default {
     },
 
     createCheck() {
-      console.log("Value company", this.form.name);
       Meteor.call("createUser", this.form.name, this.form.identification);
       location.reload();
       this.hideDialog();
     },
 
     hideDialog() {
-      this.form.name = null;
+      this.form = {
+        name: null,
+        identification: null
+      };
       this.dialog = false;
     },
   },
