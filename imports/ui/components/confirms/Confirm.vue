@@ -16,12 +16,14 @@
           >
             <template v-slot:[`item.actions`]="{ item }">
               <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
-              <v-icon @click="showDialog1(item._id)">mdi-pencil</v-icon>
+              <v-icon @click="showDialogUpdate(item._id)">mdi-pencil</v-icon>
             </template>
           </v-data-table>
         </v-card>
       </v-col>
     </v-row>
+
+    <!-- Dialog Delete Confirm -->
     <v-dialog v-model="dialog" max-width="320">
       <v-card>
         <v-card-title class="headline"> Confirmation </v-card-title>
@@ -40,7 +42,9 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialog1" persistent max-width="600px">
+
+    <!-- Dialog Update Confirm -->
+    <v-dialog v-model="dialogUpdateConfirm" persistent max-width="600px">
       <v-card>
         <v-card-title>
           <span class="headline"
@@ -73,7 +77,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="hideDialog1()"
+          <v-btn color="blue darken-1" text @click="hideDialogUpdate()"
             >Fermer</v-btn
           >
           <v-btn color="blue darken-1" text @click="updateCheck()"
@@ -102,7 +106,7 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: "",
-      dialog1: false,
+      dialogUpdateConfirm: false,
       form: "",
       foundConfirm: { _id: null, timestamp: null, roomId: null },
     };
@@ -139,14 +143,12 @@ export default {
   methods: {
     showDialog(id) {
       this.foundConfirm = this.confirms.find((confirm) => confirm._id === id);
-      console.log("Confirm", this.foundConfirm);
       this.dialog = true;
     },
 
-    showDialog1(id) {
+    showDialogUpdate(id) {
       this.foundConfirm = this.confirms.find((confirm) => confirm._id === id);
-      console.log("Confirm", this.foundConfirm);
-      this.dialog1 = true;
+      this.dialogUpdateConfirm = true;
     },
 
     updateCheck() {
@@ -156,7 +158,7 @@ export default {
         this.foundConfirm.timestamp,
         this.foundConfirm.roomId
       );
-      this.hideDialog1();
+      this.hideDialogUpdate();
     },
 
     onRemoveConfirm() {
@@ -171,9 +173,9 @@ export default {
       this.dialog = false;
     },
 
-    hideDialog1() {
+    hideDialogUpdate() {
       this.foundConfirm = { _id: null, timestamp: null, roomId: null };
-      this.dialog1 = false;
+      this.dialogUpdateConfirm = false;
     },
 
     getNow: function () {
