@@ -2,7 +2,7 @@
   <v-container class="formulaire">
     <v-row>
       <v-btn color="success" dark @click="dialog = true">
-            Ajouter un problème 
+        Ajouter un problème
       </v-btn>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
@@ -13,12 +13,20 @@
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-text-field v-model="form.title" label="Nature du problème*" required></v-text-field>
+                  <v-text-field
+                    v-model="form.title"
+                    label="Nature du problème*"
+                    required
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field v-model="form.description" label="Description du problème*" required></v-text-field>
+                  <v-text-field
+                    v-model="form.description"
+                    label="Description du problème*"
+                    required
+                  ></v-text-field>
                 </v-col>
-                   </v-row>
+              </v-row>
             </v-container>
             <small>*Champs obligatoires</small>
           </v-card-text>
@@ -43,28 +51,28 @@ export default {
   data: () => ({
     dialog: false,
     form: {
-      company: null
-    }
+      company: null,
+    },
   }),
 
   methods: {
     showDialog() {
-      this.dialog = true
+      this.dialog = true;
     },
 
-    createCheck(){
-      Meteor.call('createProblem', this.form.title, this.form.description)
-      location.reload()
-      this.hideDialog()
+    createCheck() {
+      Meteor.call("createProblem", this.form.title, this.form.description);
+      location.reload();
+      this.hideDialog();
     },
 
     hideDialog() {
       this.form = {
         title: null,
-        description: null
-      }
-      this.dialog = false
-    }
-  }
+        description: null,
+      };
+      this.dialog = false;
+    },
+  },
 };
 </script>
