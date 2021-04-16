@@ -1,9 +1,9 @@
 <template>
   <v-container class="formulaire">
     <v-row>
-     <v-btn color="success" dark @click="dialog = true">
-            Ajouter une confirmation
-     </v-btn>
+      <v-btn color="success" dark @click="dialog = true">
+        Ajouter une confirmation
+      </v-btn>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <v-card>
           <v-card-title>
@@ -13,11 +13,14 @@
             <v-container>
               <v-row>
                 <v-col cols="12">
-                  <v-select v-model="form.roomId" label="Local*" required
-                   :items="roomList"
-                   item-value="id"
-                   item-text="name"
-                  />                     
+                  <v-select
+                    v-model="form.roomId"
+                    label="Local*"
+                    required
+                    :items="roomList"
+                    item-value="id"
+                    item-text="name"
+                  />
                 </v-col>
               </v-row>
             </v-container>
@@ -38,14 +41,14 @@
   </v-container>
 </template>
 <script>
-import Confirms from '../../../api/collections/Confirms';
-import Rooms from '../../../api/collections/Rooms';
+import Confirms from "../../../api/collections/Confirms";
+import Rooms from "../../../api/collections/Rooms";
 export default {
   name: "FormConfirm",
   meteor: {
     $subscribe: {
-      'confirms': [],
-      'rooms': [],
+      confirms: [],
+      rooms: [],
     },
     confirms() {
       return Confirms.find();
@@ -58,48 +61,52 @@ export default {
       return roomsFound.map((room) => {
         return {
           name: room.name,
-          id: room._id
-        }
-      })
-    }
+          id: room._id,
+        };
+      });
+    },
   },
   data: () => ({
     timestamp: "",
     dialog: false,
     form: {
-      confirm: null
-
+      confirm: null,
     },
-    
   }),
 
   created() {
-      setInterval(this.getNow, 1000);
+    setInterval(this.getNow, 1000);
   },
 
   methods: {
     showDialog() {
-      this.dialog = true
+      this.dialog = true;
     },
 
-    createCheck(){
-      console.log("Value name", this.form.roomId)
-      Meteor.call('createConfirm', this.form.roomId)
-      this.hideDialog()
+    createCheck() {
+      console.log("Value name", this.form.roomId);
+      Meteor.call("createConfirm", this.form.roomId);
+      this.hideDialog();
     },
 
     hideDialog() {
-      this.form.roomId= null
-      this.dialog = false
+      this.form.roomId = null;
+      this.dialog = false;
     },
 
-    getNow: function() {
+    getNow: function () {
       const today = new Date();
-      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const dateTime = date +' '+ time;
+      const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date + " " + time;
       this.timestamp = dateTime;
-    }
-  }
+    },
+  },
 };
 </script>

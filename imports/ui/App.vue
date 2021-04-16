@@ -2,9 +2,8 @@
   <v-app id="app">
     <v-main>
       <Navbar />
-      <v-container
-          fluid>
-        <router-view/>
+      <v-container fluid>
+        <router-view />
       </v-container>
       <Footer />
     </v-main>
@@ -15,14 +14,13 @@
 import Navbar from "./components/layouts/Navbar.vue";
 import Footer from "./components/layouts/Footer.vue";
 export default {
-  name: 'App',
-	components: {
-		Navbar, Footer
-	},
-
-}
+  name: "App",
+  components: {
+    Navbar,
+    Footer,
+  },
+};
 </script>
 
 <style>
-
 </style>
