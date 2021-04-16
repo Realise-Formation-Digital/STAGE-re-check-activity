@@ -28,7 +28,7 @@ Meteor.methods({
 
    /**
    *  Delete Confirm
-   * @param {*} _id 
+   * @param {String} id 
    */
   'deleteConfirm'(id){
     Confirms.remove({'_id':id})
@@ -36,9 +36,9 @@ Meteor.methods({
 
   /**
    * Edit of a single confirm
-   * @param {*} id - Id of the confirm that we want to modify
-   * @param {*} timestamp - New timestamp of the confirm 
-   * @param {*} roomId - New name of the roomId
+   * @param {String} id - Id of the confirm that we want to modify
+   * @param {Number} timestamp - New timestamp of the confirm 
+   * @param {String} roomId - New name of the roomId
    */
 
   'editConfirm'(id, timestamp, roomId) {

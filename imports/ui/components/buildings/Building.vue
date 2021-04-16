@@ -128,13 +128,11 @@ export default {
   methods: {
     showDialog(id) {
       this.foundBuilding = this.buildings.find((building) => building._id === id)
-      console.log("Building", this.foundBuilding)
       this.dialog = true
     },
 
     showDialogUpdate(id) {
       this.foundBuilding = this.buildings.find((building) => building._id === id)
-      console.log("Building", this.foundBuilding)
       this.dialogUpdateBuilding = true
     },
 

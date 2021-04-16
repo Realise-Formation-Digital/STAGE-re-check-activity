@@ -55,8 +55,6 @@
     </v-row>
   </v-container>
 </template>
-
-
 <script>
 export default {
   name: "FormBuilding",
@@ -65,24 +63,27 @@ export default {
     dialog: false,
     form: {
       company: null
-
     }
   }),
+  
   methods: {
     showDialog() {
       this.dialog = true
     },
 
     createCheck(){
-
-      console.log("Value company", this.form.company)
       Meteor.call('createBuilding', this.form.company, this.form.name, this.form.address, this.form.floor)
       location.reload()
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.company = null
+      this.form = {
+        company: null,
+        name: null,
+        address: null,
+        floor: null
+      }
       this.dialog = false
     }
   }

@@ -22,7 +22,7 @@ Meteor.methods({
 
   /**
    * Delete single user
-   * @param {*} _id 
+   * @param {String} id
    */
   'deleteuser'(id){
     Users.remove({'_id':id})
@@ -30,7 +30,7 @@ Meteor.methods({
 
   /**
    * Edit of a single user
-   * @param {*} id - Id of user that we want to modify
+   * @param {String} id - Id of user that we want to modify
    * @param {String} name - user's name 
    * @param {String} identification - identification of the user
    */

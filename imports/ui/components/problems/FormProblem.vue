@@ -36,8 +36,6 @@
     </v-row>
   </v-container>
 </template>
-
-
 <script>
 export default {
   name: "FormProblem",
@@ -46,24 +44,25 @@ export default {
     dialog: false,
     form: {
       company: null
-
     }
   }),
+
   methods: {
     showDialog() {
       this.dialog = true
     },
 
     createCheck(){
-
-      console.log("Value title", this.form.title)
       Meteor.call('createProblem', this.form.title, this.form.description)
       location.reload()
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.title = null
+      this.form = {
+        title: null,
+        description: null
+      }
       this.dialog = false
     }
   }

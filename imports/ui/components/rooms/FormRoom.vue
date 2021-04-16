@@ -84,18 +84,15 @@ export default {
       floor: null,
       buildingId: null
     },
-    
   }),
+
   methods: {
     showDialog() {
       this.dialog = true
     },
 
     createCheck(){
-
-      console.log("Value name", this.form.buildingId)
       Meteor.call('createRoom', this.form.name, this.form.floor, this.form.buildingId)
-
       this.hideDialog()
     },
 

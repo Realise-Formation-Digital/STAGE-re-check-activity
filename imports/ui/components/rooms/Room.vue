@@ -18,12 +18,14 @@
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
-            <v-icon @click="showDialog1(item._id)">mdi-pencil</v-icon>
+            <v-icon @click="showDialogUpdate(item._id)">mdi-pencil</v-icon>
           </template>
         </v-data-table>
       </v-card>
     </v-col>
   </v-row>
+
+  <!-- Dialog Delete Room -->
   <v-dialog v-model="dialog" max-width="320">
     <v-card>
       <v-card-title class="headline">
@@ -39,7 +41,9 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-  <v-dialog v-model="dialog1" persistent max-width="600px">
+
+  <!-- Dialog Update Room -->
+  <v-dialog v-model="dialogUpdateRoom" persistent max-width="600px">
     <v-card>
       <v-card-title>
         <span class="headline">Modifier un local {{ foundRoom.name }}</span>
@@ -79,7 +83,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="hideDialog1()">Fermer</v-btn>
+            <v-btn color="blue darken-1" text @click="hideDialogUpdate()">Fermer</v-btn>
             <v-btn color="blue darken-1" text @click="updateCheck()">Sauvegarder</v-btn>
           </v-card-actions>
     </v-card>
@@ -104,7 +108,7 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
-      dialog1: false,
+      dialogUpdateRoom: false,
       form: '',
       foundRoom: {_id:null, name:null, floor:null, buildingId:null},
     };
@@ -137,19 +141,17 @@ export default {
   methods: {
     showDialog(id) {
       this.foundRoom = this.rooms.find((room) => room._id === id)
-      console.log("Room", this.foundRoom)
       this.dialog = true
     },
 
-    showDialog1(id) {
+    showDialogUpdate(id) {
       this.foundRoom = this.rooms.find((room) => room._id === id)
-      console.log("Room", this.foundRoom)
-      this.dialog1 = true
+      this.dialogUpdateRoom = true
     },
 
     updateCheck(){
       Meteor.call('editRoom', this.foundRoom._id, this.foundRoom.name, this.foundRoom.floor, this.foundRoom.buildingId)
-      this.hideDialog1()
+      this.hideDialogUpdate()
     },
 
     onRemoveRoom() {
@@ -164,9 +166,9 @@ export default {
       this.dialog = false
     },
 
-    hideDialog1() {
+    hideDialogUpdate() {
       this.foundRoom = {_id:null, name:null, floor:null, buildingId:null}
-      this.dialog1 = false
+      this.dialogUpdateRoom = false
     }
   },
 };

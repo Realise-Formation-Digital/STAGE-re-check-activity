@@ -18,12 +18,14 @@
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
-            <v-icon @click="showDialog1(item._id)">mdi-pencil</v-icon>
+            <v-icon @click="showDialogUpdate(item._id)">mdi-pencil</v-icon>
           </template>
         </v-data-table>
       </v-card>
     </v-col>
   </v-row>
+
+  <!-- Dialog Delete Problem -->
   <v-dialog v-model="dialog" max-width="320">
     <v-card>
       <v-card-title class="headline">
@@ -39,7 +41,9 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-  <v-dialog v-model="dialog1" persistent max-width="600px">
+
+  <!-- Dialog Update Problem -->
+  <v-dialog v-model="dialogUpdateProblem" persistent max-width="600px">
     <v-card>
       <v-card-title>
         <span class="headline">Modification lié au problème {{ foundProblem.title }}</span>
@@ -59,7 +63,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="hideDialog1()">Fermer</v-btn>
+          <v-btn color="blue darken-1" text @click="hideDialogUpdate()">Fermer</v-btn>
             <v-btn color="blue darken-1" text @click="updateCheck()">Sauvegarder</v-btn>
       </v-card-actions>
     </v-card>
@@ -82,7 +86,7 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: '',
-      dialog1: false,
+      dialogUpdateProblem: false,
       form: '',
       foundProblem: {_id:null, title:null, description:null}
     };
@@ -102,19 +106,17 @@ export default {
   methods: {
     showDialog(id) {
       this.foundProblem = this.problems.find((problem) => problem._id === id)
-      console.log("Problem", this.foundProblem)
       this.dialog = true
     },
 
-    showDialog1(id) {
+    showDialogUpdate(id) {
       this.foundProblem = this.problems.find((problem) => problem._id === id)
-      console.log("Problem", this.foundProblem)
-      this.dialog1 = true
+      this.dialogUpdateProblem = true
     },
 
     updateCheck(){
       Meteor.call('editProblem', this.foundProblem._id, this.foundProblem.title, this.foundProblem.description)
-      this.hideDialog1()
+      this.hideDialogUpdate()
     },
 
     onRemoveProblem() {
@@ -129,9 +131,9 @@ export default {
       this.dialog = false
     },
 
-    hideDialog1() {
+    hideDialogUpdate() {
       this.foundProblem = {_id:null, title:null, description:null};
-      this.dialog1 = false
+      this.dialogUpdateProblem = false
     }
   },
 };
