@@ -12,14 +12,19 @@ Meteor.methods({
       description,
     });
   },
+
+  /**
+   * Delete single problem
+   * @param {String} id
+   */
   'deleteproblem'(id){
     Problems.remove({'_id':id})
  },
  /**
    * Edit of a problem
-   * @param {*} id - Id of the problem that we want to modify
-   * @param {*} title -  title of the problem 
-   * @param {*} description - Description of problem
+   * @param {String} id - Id of the problem that we want to modify
+   * @param {String} title -  title of the problem 
+   * @param {String} description - Description of problem
    */
 
   'editProblem'(id, title, description) {

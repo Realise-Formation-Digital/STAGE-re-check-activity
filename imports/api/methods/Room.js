@@ -6,9 +6,9 @@ Meteor.methods({
 
   /**
    * Create new room
-   * @param {*} name - Name of the room
-   * @param {*} floor Name of the room's floor
-   * @param {*} buildingId Name of the room's buildingId
+   * @param {String} name - Name of the room
+   * @param {String} floor Name of the room's floor
+   * @param {String} buildingId Name of the room's buildingId
    * @returns 
    */
   'createRoom'(name, floor, buildingId) {
@@ -26,7 +26,7 @@ Meteor.methods({
   
   /**
    *  Delete Room
-   * @param {*} _id 
+   * @param {String} id 
    */
   'deleteRoom'(id) {
     Rooms.remove({'_id':id})
@@ -34,10 +34,10 @@ Meteor.methods({
 
   /**
    * Edit of a single room
-   * @param {*} id - Id of the room that we want to modify
-   * @param {*} name - New name of the room 
-   * @param {*} floor - New name of the floor
-   * @param {*} buildingId - New name of the BuildingID
+   * @param {String} id - Id of the room that we want to modify
+   * @param {String} name - New name of the room 
+   * @param {String} floor - New name of the floor
+   * @param {String} buildingId - New name of the BuildingID
    */
 
   'editRoom'(id, name, floor, buildingId) {
