@@ -84,7 +84,7 @@ export default {
 
     createCheck(){
       console.log("Value name", this.form.roomId)
-      Meteor.call('createConfirm',  this.timestamp, this.form.roomId, )
+      Meteor.call('createConfirm', this.form.roomId)
       this.hideDialog()
     },
 
