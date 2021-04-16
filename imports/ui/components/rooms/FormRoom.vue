@@ -80,8 +80,9 @@ export default {
   data: () => ({
     dialog: false,
     form: {
-      room: null
-
+      room: null,
+      floor: null,
+      buildingId: null
     },
     
   }),
@@ -94,13 +95,16 @@ export default {
 
       console.log("Value name", this.form.buildingId)
       Meteor.call('createRoom', this.form.name, this.form.floor, this.form.buildingId)
-      
 
       this.hideDialog()
     },
 
     hideDialog() {
-      this.form.buildingId= null
+      this.form = {
+        room: null,
+        floor: null,
+        buildingId: null
+      }
       this.dialog = false
     }
   }

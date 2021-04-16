@@ -5,14 +5,21 @@ import Confirms from '../collections/Confirms.js';
 Meteor.methods({
   /**
    * Create new confirm
-   * @param {*} timestamp - Date of confirm
-   * @param {*} roomId Name of the confirm's roomId
-   * @returns 
+   * @param {Number} timestamp - Date of confirm
+   * @param {String} roomId Name of the confirm's roomId
+   * @param {String[]} problems - array of problems
+   * @returns
    */
-  'createConfirm'(timestamp, roomId) {
-    check(timestamp, String);
+  'createConfirm'(roomId, problems) {
+    //check(timestamp, String);
     check(roomId, String);
-    
+    // check(problems, [String]);
+
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const timestamp = date +' '+ time;
+
     return Confirms.insert({
       timestamp,
       roomId
