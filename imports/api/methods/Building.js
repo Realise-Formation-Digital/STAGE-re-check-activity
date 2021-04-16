@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Buildings from '../collections/Buildings.js';
+import Rooms from "../collections/Rooms";
 
 Meteor.methods({
 
@@ -28,9 +29,15 @@ Meteor.methods({
 
   /**
    * Delete single building
-   * @param {*} _id 
+   * @param {String} id
    */
-  'deletebuilding'(id){
+  'deletebuilding'(id) {
+    check(id, String);
+
+    // delete rooms
+    Rooms.remove({'buildingId': id})
+
+    // delete building
     Buildings.remove({'_id':id})
   },
 
