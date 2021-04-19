@@ -18,6 +18,10 @@
               <v-icon @click="showDialog(item._id)">mdi-delete</v-icon>
               <v-icon @click="showDialogUpdate(item._id)">mdi-pencil</v-icon>
             </template>
+
+            <template v-slot:[`item.roomId`]="{ item }">
+              {{ findRoomName(item.roomId) }}
+            </template>
           </v-data-table>
         </v-card>
       </v-col>
@@ -65,11 +69,15 @@
                 />
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="foundConfirm.timestamp"
-                  label="Heure de confirmation*"
-                  required
-                ></v-text-field>
+                <v-autocomplete
+                  v-model="foundConfirm.status"
+                  :items="[
+                    'Pas nettoyé',
+                    'En attente',
+                    'Nettoyé'
+                  ]"
+                  label="Status*"
+                ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -97,23 +105,20 @@ export default {
   name: "confirms",
   data() {
     return {
-      timestamp: "",
       Rooms: [],
       Confirms: [],
       headers: [
         { text: "ID", align: "start", sortable: true, value: "_id" },
+        { text: "Local", value: "roomId", sortable: true },
+        { text: "Status", value: "status", sortable: true },
         { text: "Date Confirmation", value: "timestamp", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: "",
       dialogUpdateConfirm: false,
       form: "",
-      foundConfirm: { _id: null, timestamp: null, roomId: null },
+      foundConfirm: { _id: null, status: null, timestamp: null, roomId: null },
     };
-  },
-
-  created() {
-    setInterval(this.getNow, 1000);
   },
 
   components: { FormConfirm },
@@ -151,12 +156,18 @@ export default {
       this.dialogUpdateConfirm = true;
     },
 
+    findRoomName(idRoom) {
+      const foundRoom = this.rooms.find((r) => r._id === idRoom);
+      if (!foundRoom) return "";
+      return foundRoom.name;
+    },
+
     updateCheck() {
       Meteor.call(
         "editConfirm",
         this.foundConfirm._id,
-        this.foundConfirm.timestamp,
-        this.foundConfirm.roomId
+        this.foundConfirm.roomId,
+        this.foundConfirm.status
       );
       this.hideDialogUpdate();
     },
@@ -164,32 +175,18 @@ export default {
     onRemoveConfirm() {
       if (!this.foundConfirm) return;
       Meteor.call("deleteConfirm", this.foundConfirm._id);
-      this.foundConfirm = { _id: null, timestamp: null, roomId: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null };
       this.hideDialog();
     },
 
     hideDialog() {
-      this.foundConfirm = { _id: null, timestamp: null, roomId: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null };
       this.dialog = false;
     },
 
     hideDialogUpdate() {
-      this.foundConfirm = { _id: null, timestamp: null, roomId: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null };
       this.dialogUpdateConfirm = false;
-    },
-
-    getNow: function () {
-      const today = new Date();
-      const date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
-      const time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const dateTime = date + " " + time;
-      this.timestamp = dateTime;
     },
   },
 };
