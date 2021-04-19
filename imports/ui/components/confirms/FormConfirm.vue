@@ -22,6 +22,17 @@
                     item-text="name"
                   />
                 </v-col>
+                <v-col cols="12">
+                  <v-autocomplete
+                    v-model="form.status"
+                    :items="[
+                      'Pas nettoyé',
+                      'En attente',
+                      'Nettoyé',
+                    ]"
+                    label="Status*"
+                  ></v-autocomplete>
+                </v-col>
               </v-row>
             </v-container>
             <small>*Champs obligatoires</small>
@@ -67,16 +78,11 @@ export default {
     },
   },
   data: () => ({
-    timestamp: "",
     dialog: false,
     form: {
       confirm: null,
     },
   }),
-
-  created() {
-    setInterval(this.getNow, 1000);
-  },
 
   methods: {
     showDialog() {
@@ -84,28 +90,16 @@ export default {
     },
 
     createCheck() {
-      console.log("Value name", this.form.roomId);
-      Meteor.call("createConfirm", this.form.roomId);
+      Meteor.call("createConfirm", this.form.roomId, this.form.status);
       this.hideDialog();
     },
 
     hideDialog() {
-      this.form.roomId = null;
+      this.form = {
+        roomId: null,
+        status: null,
+      }; 
       this.dialog = false;
-    },
-
-    getNow: function () {
-      const today = new Date();
-      const date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
-      const time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const dateTime = date + " " + time;
-      this.timestamp = dateTime;
     },
   },
 };
