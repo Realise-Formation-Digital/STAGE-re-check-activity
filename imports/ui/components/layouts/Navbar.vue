@@ -68,12 +68,6 @@ export default {
         icon: "mdi-check-circle-outline",
         color: "blue",
       },
-      {
-        title: "UTILISATEURS",
-        route: "/utilisateurs",
-        icon: "mdi-account",
-        color: "red",
-      },
     ],
   }),
 };
