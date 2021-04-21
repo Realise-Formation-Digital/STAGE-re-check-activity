@@ -65,6 +65,9 @@ Accounts.onEmailVerificationLink(function (token, done) {
     } else {
       console.log("Success");
       window.location.href = 'http://localhost:3000/login';
+
+      // add Function to send email to change the initial password
+      Accounts.sendEnrollmentEmail()
       done();
     }
   });

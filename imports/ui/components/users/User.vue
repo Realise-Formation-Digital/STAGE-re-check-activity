@@ -51,7 +51,7 @@ export default {
       Users: [],
       email: "",
       headers: [
-        { text: "Email", align: "start", sortable: true, value: "email" },
+        { text: "Email", align: "start", sortable: true, value: "emails[0].address" },
         { text: "ID", value: "_id", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
