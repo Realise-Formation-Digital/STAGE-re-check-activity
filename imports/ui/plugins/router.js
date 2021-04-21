@@ -1,5 +1,5 @@
 // Import the router
-import {Meteor} from "meteor/meteor";
+import { Meteor } from "meteor/meteor";
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -8,7 +8,9 @@ import Home from "../components/Home";
 import Building from "../components/buildings/Building";
 import Room from "../components/rooms/Room";
 import Problem from "../components/problems/Problem";
-import Confirm from "../components/confirms/Confirm"
+import Confirm from "../components/confirms/Confirm";
+import User from "../components/users/User";
+import Login from "../components/Login";
 
 Vue.use(VueRouter)
 
@@ -38,10 +40,32 @@ const routes = [
     name: 'confirm',
     component: Confirm,
   },
+  {
+    path: '/utilisateurs',
+    name: 'user',
+    component: User,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
 
 ]
 
 export default new VueRouter({
   mode: 'history',
   routes: routes
-})
+});
+
+Accounts.onEmailVerificationLink(function (token, done) {
+  Accounts.verifyEmail(token, (err) => {
+    if (err) {
+      console.log("Error: ", err);
+    } else {
+      console.log("Success");
+      window.location.href = 'http://localhost:3000/login';
+      done();
+    }
+  });
+});

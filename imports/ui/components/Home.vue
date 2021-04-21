@@ -2,7 +2,7 @@
   <v-card class="px-4">
     <v-row>
       <v-col cols="12">
-        <h2 >Inscription</h2>
+        <h2>Inscription</h2>
       </v-col>
     </v-row>
     <v-form ref="form" v-model="valid" lazy-validation>
@@ -43,7 +43,7 @@
           <v-card-title class="headline"> Confirmation </v-card-title>
           <v-card-text>
             Vous allez recevoir un email de confirmation à l'adresse suivante :
-            <strong>{{ this.email }}</strong> ?
+            <strong>{{ this.email }}</strong>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -57,7 +57,6 @@
   </v-card>
 </template>
 <script>
-import { Accounts } from "meteor/accounts-base";
 export default {
   name: "index",
   data: () => ({
@@ -70,18 +69,14 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "L'email doit être valide",
     ],
     passwordRules: [
-      required = value => !!value || "Obligatoire",
-      min = v => (v && v.length >= 8) || "Min 8 caractères",
+      (required = (value) => !!value || "Obligatoire"),
+      (min = (v) => (v && v.length >= 8) || "Min 8 caractères"),
     ],
   }),
 
   methods: {
     validate() {
-      this.$refs.form.validate();
-      const res = Accounts.createUser({
-        email: this.email,
-        password: this.password,
-      });
+      Meteor.call("registerUser", this.email, this.password);
       this.showDialog();
     },
 

@@ -26,7 +26,7 @@
         <v-card-title class="headline"> Utilisateur </v-card-title>
         <v-card-text>
           Êtes-vous certain de vouloir supprimer l'utilisateur
-          <strong>{{ foundUser && foundUser.name }}</strong> ?
+          <strong>{{ foundUser && foundUser.email }}</strong> ?
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -42,7 +42,6 @@
   </v-container>
 </template>
 <script>
-import Users from "../../../api/collections/Users";
 import FormUser from "./FormUser.vue";
 
 export default {
@@ -50,10 +49,10 @@ export default {
   data() {
     return {
       Users: [],
-      name: "",
+      email: "",
       headers: [
-        { text: "Nom", align: "start", sortable: true, value: "name" },
-        { text: "Id", value: "identification", sortable: true },
+        { text: "Email", align: "start", sortable: true, value: "email" },
+        { text: "ID", value: "_id", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: "",
@@ -68,13 +67,13 @@ export default {
       users: [],
     },
     users() {
-      return Users.find();
+      return Meteor.users.find();
     },
   },
 
   methods: {
     showDialog(id) {
-      this.foundUser = this.users.find((user) => user._id === id);
+      this.foundUser = Meteor.users.find((user) => user._id === id);
       this.dialog = true;
     },
 

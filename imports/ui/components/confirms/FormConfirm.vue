@@ -25,13 +25,17 @@
                 <v-col cols="12">
                   <v-autocomplete
                     v-model="form.status"
-                    :items="[
-                      'Pas nettoyé',
-                      'En attente',
-                      'Nettoyé',
-                    ]"
+                    :items="['Pas nettoyé', 'En attente', 'Nettoyé']"
                     label="Status*"
                   ></v-autocomplete>
+                </v-col>
+                <v-col style="width: 350px; flex: 0 1 auto">
+                  <h2>Début:</h2>
+                  <v-time-picker v-model="start" :max="end"></v-time-picker>
+                </v-col>
+                <v-col style="width: 350px; flex: 0 1 auto">
+                  <h2>Fin:</h2>
+                  <v-time-picker v-model="end" :min="start"></v-time-picker>
                 </v-col>
               </v-row>
             </v-container>
@@ -55,6 +59,12 @@
 import Confirms from "../../../api/collections/Confirms";
 import Rooms from "../../../api/collections/Rooms";
 export default {
+  data () {
+      return {
+        start: null,
+        end: null,
+      }
+    },
   name: "FormConfirm",
   meteor: {
     $subscribe: {
@@ -90,7 +100,7 @@ export default {
     },
 
     createCheck() {
-      Meteor.call("createConfirm", this.form.roomId, this.form.status);
+      Meteor.call("createConfirm", this.form.roomId, this.form.status, this.start, this.end);
       this.hideDialog();
     },
 
@@ -98,7 +108,9 @@ export default {
       this.form = {
         roomId: null,
         status: null,
-      }; 
+      };
+      this.start = null;
+      this.end = null;
       this.dialog = false;
     },
   },

@@ -14,15 +14,15 @@
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="form.name"
-                    label="Nom*"
+                    v-model="form.email"
+                    label="Email*"
                     required
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="form.identification"
-                    label="Identification*"
+                    v-model="form.password"
+                    label="Mot de passe*"
                     required
                   ></v-text-field>
                 </v-col>
@@ -51,7 +51,8 @@ export default {
   data: () => ({
     dialog: false,
     form: {
-      company: null,
+      email: null,
+      password: null
     },
   }),
   methods: {
@@ -60,15 +61,15 @@ export default {
     },
 
     createCheck() {
-      Meteor.call("createUser", this.form.name, this.form.identification);
+      Meteor.call("createUser", this.form.email, this.form.password);
       location.reload();
       this.hideDialog();
     },
 
     hideDialog() {
       this.form = {
-        name: null,
-        identification: null
+        email: null,
+        password: null
       };
       this.dialog = false;
     },
