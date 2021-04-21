@@ -79,6 +79,14 @@
                   label="Status*"
                 ></v-autocomplete>
               </v-col>
+              <v-col style="width: 350px; flex: 0 1 auto">
+                  <h2>Début:</h2>
+                  <v-time-picker v-model="foundConfirm.start" :max="foundConfirm.end"></v-time-picker>
+                </v-col>
+                <v-col style="width: 350px; flex: 0 1 auto">
+                  <h2>Fin:</h2>
+                  <v-time-picker v-model="foundConfirm.end" :min="foundConfirm.start"></v-time-picker>
+                </v-col>
             </v-row>
           </v-container>
           <small>*Champs obligatoires</small>
@@ -108,16 +116,17 @@ export default {
       Rooms: [],
       Confirms: [],
       headers: [
-        { text: "ID", align: "start", sortable: true, value: "_id" },
-        { text: "Local", value: "roomId", sortable: true },
+        { text: "Local", align: "start", sortable: true, value: "roomId" },
+        { text: "Début", value: "start", sortable: true },
+        { text: "Fin", value: "end", sortable: true },
         { text: "Status", value: "status", sortable: true },
-        { text: "Date Confirmation", value: "timestamp", sortable: true },
+        { text: "Dernier Horodatage", value: "timestamp", sortable: true },
         { text: "Actions", value: "actions", sortable: false },
       ],
       dialog: "",
       dialogUpdateConfirm: false,
       form: "",
-      foundConfirm: { _id: null, status: null, timestamp: null, roomId: null },
+      foundConfirm: { _id: null, status: null, timestamp: null, roomId: null, start: null, end: null },
     };
   },
 
@@ -167,7 +176,9 @@ export default {
         "editConfirm",
         this.foundConfirm._id,
         this.foundConfirm.roomId,
-        this.foundConfirm.status
+        this.foundConfirm.status,
+        this.foundConfirm.start,
+        this.foundConfirm.end
       );
       this.hideDialogUpdate();
     },
@@ -175,17 +186,17 @@ export default {
     onRemoveConfirm() {
       if (!this.foundConfirm) return;
       Meteor.call("deleteConfirm", this.foundConfirm._id);
-      this.foundConfirm = { _id: null, roomId: null, status: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null, start: null, end: null };
       this.hideDialog();
     },
 
     hideDialog() {
-      this.foundConfirm = { _id: null, roomId: null, status: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null, start: null, end: null };
       this.dialog = false;
     },
 
     hideDialogUpdate() {
-      this.foundConfirm = { _id: null, roomId: null, status: null };
+      this.foundConfirm = { _id: null, roomId: null, status: null, start: null, end: null };
       this.dialogUpdateConfirm = false;
     },
   },

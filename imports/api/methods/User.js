@@ -1,48 +1,49 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Accounts } from "meteor/accounts-base";
 
 
 Meteor.methods({
   /**
    * Create new user 
-   * @param {String} name - user's name
-   * @param {String} identification - user's identification  
+   * @param {String} email - user's name
+   * @param {String} password - user's identification  
    * @returns 
    */
-   'createUser'(name, identification) {
-    check(name, String);
-    check(identification, String);
-   
+  'registerUser'(email, password) {
+    check(email, String);
+    check(password, String);
 
-    return Users.insert({
-      name,
-      identification,
-      });
+    let userId = Accounts.createUser({
+      email: email,
+      password: password
+    });
+    Accounts.sendVerificationEmail(userId);
   },
 
   /**
    * Delete single user
    * @param {String} id
    */
-  'deleteuser'(id){
-    Users.remove({'_id':id})
+  'deleteuser'(id) {
+    Users.remove({ '_id': id })
   },
 
   /**
    * Edit of a single user
    * @param {String} id - Id of user that we want to modify
-   * @param {String} name - user's name 
-   * @param {String} identification - identification of the user
+   * @param {String} email - user's name 
+   * @param {String} password - identification of the user
    */
-  'edituser' (id, name, identification) {
+  'edituser'(id, email, passowrd) {
 
     // First we have to check if the fields are inserted in the right way 
-    check(name, String);
-    check(identification, String);
+    check(email, String);
+    check(password, String);
     // we have to update the database
-    Users.update({"_id": id}, {
-      'name': name,
-      'identification': identification,
-     })
+    Users.update({ "_id": id }, {
+      'email': email,
+      'password': password,
+    })
   }
 });

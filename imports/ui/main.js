@@ -14,4 +14,4 @@ Meteor.startup(() => {
     vuetify: vuetify,
     ...App,
   })
-})
+});
