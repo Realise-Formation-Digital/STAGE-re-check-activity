@@ -21,6 +21,10 @@ Meteor.methods({
     Accounts.sendVerificationEmail(userId);
   },
 
+  'accountSendEnrollmentEmail' (userId){
+    Accounts.sendEnrollmentEmail(userId)
+  },
+
   /**
    * Delete single user
    * @param {String} id

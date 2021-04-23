@@ -63,19 +63,23 @@ Accounts.onEmailVerificationLink(function (token, done) {
     if (err) {
       console.log("Error: ", err);
     } else {
+
+      // Call a method in the server to send the enrollment email
+
+
       console.log("Success");
-     
-      // add Function to send email to change the initial password
-      Accounts.onEnrollmentLink((token, done) => {
-        Accounts.resetPassword(token, newPassword, (err) => {
-          if (err) {
-             console.log("Error: ", err);
-          } else {
-             window.location.href = 'http://localhost:3000/login'
-            done();
-          }
-        });
-      });
+    }
+  });
+});
+
+// add Function to send email to change the initial password
+Accounts.onEnrollmentLink((token, done) => {
+  Accounts.resetPassword(token, newPassword, (err) => {
+    if (err) {
+      console.log("Error: ", err);
+    } else {
+      window.location.href = 'http://localhost:3000/login'
+      done();
     }
   });
 });
