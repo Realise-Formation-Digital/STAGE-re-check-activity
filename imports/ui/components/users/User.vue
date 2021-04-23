@@ -128,12 +128,15 @@ export default {
   
   methods: {
     showDialog(id) {
-      this.foundUser = Meteor.users.find((user) => user._id === id);
+      const userFound = Meteor.users.findOne({'_id' : id});
+      this.foundUser.email = userFound.emails[0].address;
+      this.foundUser._id = userFound._id;
       this.dialog = true;
     },
 
     showDialogUpdate(id) {
-      this.foundUser = Meteor.users.find((user) => user._id === id);
+      const userFound = Meteor.users.findOne({'_id' : id});
+      this.foundUser.email = userFound.emails[0].address
       this.dialogUpdateUser = true;
     },
 
