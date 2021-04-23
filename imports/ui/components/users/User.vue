@@ -61,13 +61,6 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="foundUser.password"
-                  label="Mot de passe*"
-                  required
-                ></v-text-field>
-              </v-col>
             </v-row>
           </v-container>
           <small>*Champs obligatoires</small>
@@ -110,7 +103,6 @@ export default {
       foundUser: {
         _id: null,
         email: null,
-        password: null,
       },
     };
   },
@@ -129,34 +121,34 @@ export default {
   methods: {
     showDialog(id) {
       const userFound = Meteor.users.findOne({'_id' : id});
-      this.foundUser.email = userFound.emails[0].address;
       this.foundUser._id = userFound._id;
+      this.foundUser.email = userFound.emails[0].address;
       this.dialog = true;
     },
 
     showDialogUpdate(id) {
       const userFound = Meteor.users.findOne({'_id' : id});
+      this.foundUser._id = userFound._id;
       this.foundUser.email = userFound.emails[0].address
       this.dialogUpdateUser = true;
     },
 
     updateCheck() {
-      Meteor.call(
-        "edituser",
-        this.foundUser._id,
-        this.foundUser.email,
-        this.foundUser.password
-      );
+      if (!this.foundUser) return;
+      Meteor.call( "editUser", this.foundUser._id, this.foundUser.email);
+      this.foundUser = {
+        _id: null,
+        email: null,
+      };
       this.hideDialogUpdate();
     },
 
     onRemoveUser() {
       if (!this.foundUser) return;
-      Meteor.call("deleteuser", this.foundUser._id);
+      Meteor.call("deleteUser", this.foundUser._id,  this.foundUser.email);
       this.foundUser = {
         _id: null,
         email: null,
-        password: null,
       };
       this.hideDialog();
     },
@@ -165,7 +157,6 @@ export default {
       this.foundUser = {
         _id: null,
         email: null,
-        password: null,
       };
       this.dialog = false;
     },
@@ -174,7 +165,6 @@ export default {
       this.foundUser = {
         _id: null,
         email: null,
-        password: null,
       };
       this.dialogUpdateUser = false;
     },
