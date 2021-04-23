@@ -61,7 +61,7 @@ export default {
     },
 
     createCheck() {
-      Meteor.call("createUser", this.form.email, this.form.password);
+      Meteor.call("registerUser", this.form.email, this.form.password);
       location.reload();
       this.hideDialog();
     },

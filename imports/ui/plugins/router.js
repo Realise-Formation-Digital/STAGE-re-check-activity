@@ -64,11 +64,18 @@ Accounts.onEmailVerificationLink(function (token, done) {
       console.log("Error: ", err);
     } else {
       console.log("Success");
-      window.location.href = 'http://localhost:3000/login';
-
+     
       // add Function to send email to change the initial password
-      Accounts.sendEnrollmentEmail()
-      done();
+      Accounts.onEnrollmentLink((token, done) => {
+        Accounts.resetPassword(token, newPassword, (err) => {
+          if (err) {
+             console.log("Error: ", err);
+          } else {
+             window.location.href = 'http://localhost:3000/login'
+            done();
+          }
+        });
+      });
     }
   });
 });
